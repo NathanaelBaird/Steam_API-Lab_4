@@ -4,7 +4,6 @@ import json
 def get_short_description(app_id, plain_text="true", lang="english"):
     url = f"https://steam-api7.p.rapidapi.com/appDetails/shortDescription/{app_id}"
     
-    # Query parameters for the request
     querystring = {"plainText": plain_text, "lang": lang}
     
     headers = {
@@ -13,12 +12,8 @@ def get_short_description(app_id, plain_text="true", lang="english"):
     }
     
     try:
-        # Make the API request with query parameters
         response = requests.get(url, headers=headers, params=querystring)
-        
-        # Check if the request was successful
         if response.status_code == 200:
-            # Parse and print the response data
             response_data = response.json()
             print(json.dumps(response_data, indent=4))
         else:
@@ -26,6 +21,3 @@ def get_short_description(app_id, plain_text="true", lang="english"):
     
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
-
-# Example usage:
-get_short_description("271590", plain_text="true", lang="english")

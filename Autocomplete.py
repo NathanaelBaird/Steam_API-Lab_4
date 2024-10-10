@@ -4,7 +4,6 @@ import json
 def steam_autocomplete(query, limit=5):
     url = "https://steam-api7.p.rapidapi.com/autocomplete"
     
-    # Query parameters for the autocomplete request
     querystring = {"query": query, "limit": str(limit)}
     
     headers = {
@@ -13,12 +12,8 @@ def steam_autocomplete(query, limit=5):
     }
     
     try:
-        # Make the request with the query parameters
         response = requests.get(url, headers=headers, params=querystring)
-        
-        # Check if the request was successful
         if response.status_code == 200:
-            # Parse and print the response in a readable format
             response_data = response.json()
             print(json.dumps(response_data, indent=4))
         else:
@@ -26,6 +21,3 @@ def steam_autocomplete(query, limit=5):
     
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
-
-# Example usage:
-steam_autocomplete("Lego", 5)

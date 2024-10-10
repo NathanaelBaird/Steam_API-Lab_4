@@ -1,9 +1,7 @@
 import requests
 import json
 
-#with or without parameters
-
-def get_total_steam_apps(query_params=None):
+def get_total_steam_apps():
     url = "https://steam-api7.p.rapidapi.com/totalApps"
     
     headers = {
@@ -12,12 +10,8 @@ def get_total_steam_apps(query_params=None):
     }
     
     try:
-        # Make the API request, passing query parameters if provided
-        response = requests.get(url, headers=headers, params=query_params)
-        
-        # Check if the request was successful
+        response = requests.get(url, headers=headers)
         if response.status_code == 200:
-            # Parse and print the response data
             response_data = response.json()
             print(json.dumps(response_data, indent=4))
         else:
@@ -25,10 +19,3 @@ def get_total_steam_apps(query_params=None):
     
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
-
-# Example usage with and without query parameters:
-# get_total_steam_apps()  # No query parameters
-
-# Example with query parameters (you can customize this based on the API docs):
-# For example, adding a "type" filter:
-get_total_steam_apps(query_params={"type": "game"})
